@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 
 // customized extend AppCompatActivity
+
 class MainActivity : AppCompatActivity() {
     private val TAG = "lifecycle"
 
