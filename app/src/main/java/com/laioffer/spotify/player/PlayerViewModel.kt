@@ -58,6 +58,11 @@ class PlayerViewModel @Inject constructor(
         exoPlayer.pause()
     }
 
+    fun clear() {
+        exoPlayer.pause()
+        _uiState.value = PlayerUiState()
+    }
+
     override fun onCleared() {
         exoPlayer.removeListener(this)
         super.onCleared()
@@ -75,7 +80,13 @@ class PlayerViewModel @Inject constructor(
         super.onPlayerError(error)
         Log.d("spotify", error.toString())
     }
-
+    fun seekTo(positionMs: Long) {
+        // optimistic update
+        _uiState.value = uiState.value.copy(
+            currentMs = positionMs
+        )
+        exoPlayer.seekTo(positionMs)
+    }
 }
 
 data class PlayerUiState(
